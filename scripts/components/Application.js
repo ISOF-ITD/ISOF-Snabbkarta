@@ -89,6 +89,18 @@ export default class Application extends React.Component {
 						// Söker i varje searchFields som defineras i config filen
 						_.each(searchLayer.config.searchFields, function (searchField) {
 
+							// Handle layers with different object ids:
+							let hitId = null;
+							if (feature.id) {
+								hitId = feature.id;
+							} else if (feature.properties && feature.properties.id) {
+								hitId = feature.properties.id;
+							} else if (feature.properties && feature.properties.OGR_FID) {
+								hitId = feature.properties.OGR_FID;
+							} else if (feature.properties && feature.properties.fid) {
+								hitId = feature.properties.fid;
+							}
+
 							// Mainly for Ölandskartan: Sökresultat som börjar på huvudled. 
 							if (selected.options[selected.selectedIndex].value == 'mainpart') {
 								if (feature.properties["hl"]) {
@@ -98,7 +110,7 @@ export default class Application extends React.Component {
 										minY = returnLowest(minY, feature.geometry.coordinates[1]);
 										maxX = returnHighest(maxX, feature.geometry.coordinates[0]);
 										maxY = returnHighest(maxY, feature.geometry.coordinates[1]);
-										idSet.add(feature.id); 
+										idSet.add(hitId); 
 									}
 								}
 							} else {
@@ -109,7 +121,7 @@ export default class Application extends React.Component {
 										minY = returnLowest(minY, feature.geometry.coordinates[1]);
 										maxX = returnHighest(maxX, feature.geometry.coordinates[0]);
 										maxY = returnHighest(maxY, feature.geometry.coordinates[1]);
-										idSet.add(feature.id); 
+										idSet.add(hitId); 
 									}
 								}
 								else if (selected.options[selected.selectedIndex].value === 'startswith') {
@@ -119,7 +131,7 @@ export default class Application extends React.Component {
 										minY = returnLowest(minY, feature.geometry.coordinates[1]);
 										maxX = returnHighest(maxX, feature.geometry.coordinates[0]);
 										maxY = returnHighest(maxY, feature.geometry.coordinates[1]);
-										idSet.add(feature.id); 
+										idSet.add(hitId); 
 									}
 								}
 								else {
@@ -136,7 +148,7 @@ export default class Application extends React.Component {
 										minY = returnLowest(minY, feature.geometry.coordinates[1]);
 										maxX = returnHighest(maxX, feature.geometry.coordinates[0]);
 										maxY = returnHighest(maxY, feature.geometry.coordinates[1]);
-										idSet.add(feature.id); 
+										idSet.add(hitId); 
 									}
 								}
 							}
