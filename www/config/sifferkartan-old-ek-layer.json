@@ -18,16 +18,26 @@
 			"searchTextSelectExtended": true, 
 			"searchTextSelectDefault" : "endswith", 
 			"searchFields": [
-				"kartbladsid",
-				"sok"
+				"kartid",
+				"insamlare",
+				"insamlare2",
+				"insamlare3",
+				"insamlare4",
+				"insamlare5"
 			],
 			"name": "Ekonomiska kartan",
-			"__url": "https://sifferkartan.isof.se/data/sifferkartor_ekonomiska_kartan_geo.geojson",
-			"url": "data/sifferkartan/sifferkartor_ekonomiska_kartan_geo.geojson",
+			"__url": "https://frigg-test.isof.se/sagendatabas/api/isofgeo_proxy/Sifferkartor/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Sifferkartor:Sifferkartor-ekonomiska-kartan-isof&maxFeatures=10000&outputFormat=application%2Fjson&srsname=EPSG:4326",
+			"url": "https://garm.isof.se/folkeservice/api/isofgeo_proxy/Sifferkartor/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=Sifferkartor:Sifferkartor-ekonomiska-kartan-isof&maxFeatures=10000&outputFormat=application%2Fjson&srsname=EPSG:4326",
+			"__url": "https://sifferkartan.isof.se/data/sifferkartor-ekonomiska-kartan-isof.geojson",
+			"__url": "data/sifferkartan/sifferkartor-ekonomiska-kartan-isof.geojson",
 			"clustered": false,
-			"layers": "Sifferkartor:sifferkartor_ekonomiska_kartan_geo",
-			"popupTemplate": "<div style=\"max-width: 400px;max-height: 300px\"><h3><%= kartbladsid %></h3>Antal sifferkartor: <%= antal %> <%= sok %></div>",
-			"labelField": "kartbladsid"
+			"layers": "Sifferkartor:Sifferkartor-ekonomiska-kartan-isof",
+			"popupTemplate": "<div><h2><%= kartid %></h2>Antal sifferkartor: <%= antalfil %><table><tr><td><a href=\"//filemaker.isof.se/Kartor-dokument/<%= kartlank %>\" target=\"_blank\" rel=\"noopener noreferrer\" ><%= filnamn %></a></td><td><%= sifferkid %></td><td><%= accnr %></td><td><%= insamlare %></td></tr><tr><td><a href=\"//filemaker.isof.se/Kartor-dokument/<%= kartlank2 %>\" target=\"_blank\" rel=\"noopener noreferrer\" ><%= filnamn2 %></a></td><td><%= sifferkid2 %></td><td><%= accnr2 %></td><td><%= insamlare2 %></td></tr><tr><td><a href=\"//filemaker.isof.se/Kartor-dokument/<%= kartlank3 %>\" target=\"_blank\" rel=\"noopener noreferrer\" ><%= filnamn3 %></a></td><td><%= sifferkid3 %></td><td><%= accnr3 %></td><td><%= insamlare3 %></td></tr><tr><td><a href=\"//filemaker.isof.se/Kartor-dokument/<%= kartlank4 %>\" target=\"_blank\" rel=\"noopener noreferrer\" ><%= filnamn4 %></a></td><td><%= sifferkid4 %></td><td><%= accnr4 %></td><td><%= insamlare4 %></td></tr><tr><td><a href=\"//filemaker.isof.se/Kartor-dokument/<%= kartlank5 %>\" target=\"_blank\" rel=\"noopener noreferrer\" ><%= filnamn5 %></a></td><td><%= sifferkid5 %></td><td><%= accnr5 %></td><td><%= insamlare5 %></td></tr></table></div>",
+			"__rem_filemaker_FM_SWEDISH_LETTERS_popupTemplate": "<div><h2><%= kartid %></h2>Antal sifferkartor: <%= antalfil %><table><tr><td><a href=\"//filemaker.isof.se/Kartor-dokument/<%= kartlank %>\" target=\"_blank\" rel=\"noopener noreferrer\" ><%= filnamn %></a></td><td><%= sifferkid %></td><td><%= accnr %></td><td><%= insamlare %></td></tr><tr><td><a href=\"//filemaker.isof.se/Kartor-dokument/<%= kartlank2 %>\" target=\"_blank\" rel=\"noopener noreferrer\" ><%= filnamn2 %></a></td><td><%= sifferkid2 %></td><td><%= accnr2 %></td><td><%= insamlare2 %></td></tr><tr><td><a href=\"//filemaker.isof.se/Kartor-dokument/<%= kartlank3 %>\" target=\"_blank\" rel=\"noopener noreferrer\" ><%= filnamn3 %></a></td><td><%= sifferkid3 %></td><td><%= accnr3 %></td><td><%= insamlare3 %></td></tr><tr><td><a href=\"//filemaker.isof.se/Kartor-dokument/<%= kartlank4 %>\" target=\"_blank\" rel=\"noopener noreferrer\" ><%= filnamn4 %></a></td><td><%= sifferkid4 %></td><td><%= accnr4 %></td><td><%= insamlare4 %></td></tr><tr><td><a href=\"//filemaker.isof.se/Kartor-dokument/<%= kartlank5 %>\" target=\"_blank\" rel=\"noopener noreferrer\" ><%= filnamn5 %></a></td><td><%= sifferkid5 %></td><td><%= accnr5 %></td><td><%= insamlare5 %></td></tr></table></div>",
+			"__rem_WWW4_FM_SWEDISH_LETTERS_popupTemplate": "<div><h2><%= kartid %></h2>Antal sifferkartor: <%= antalfil %><table><tr><td><a href=\"//www4.isof.se/Ortnamnskartor/<%= kartlank %>\" target=\"_blank\" rel=\"noopener noreferrer\" ><%= filnamn %></a></td><td><%= sifferkid %></td><td><%= accnr %></td><td><%= insamlare %></td></tr><tr><td><a href=\"//www4.isof.se/Ortnamnskartor/<%= kartlank2 %>\" target=\"_blank\" rel=\"noopener noreferrer\" ><%= filnamn2 %></a></td><td><%= sifferkid2 %></td><td><%= accnr2 %></td><td><%= insamlare2 %></td></tr><tr><td><a href=\"//www4.isof.se/Ortnamnskartor/<%= kartlank3 %>\" target=\"_blank\" rel=\"noopener noreferrer\" ><%= filnamn3 %></a></td><td><%= sifferkid3 %></td><td><%= accnr3 %></td><td><%= insamlare3 %></td></tr><tr><td><a href=\"//www4.isof.se/Ortnamnskartor/<%= kartlank4 %>\" target=\"_blank\" rel=\"noopener noreferrer\" ><%= filnamn4 %></a></td><td><%= sifferkid4 %></td><td><%= accnr4 %></td><td><%= insamlare4 %></td></tr><tr><td><a href=\"//www4.isof.se/Ortnamnskartor/<%= kartlank5 %>\" target=\"_blank\" rel=\"noopener noreferrer\" ><%= filnamn5 %></a></td><td><%= sifferkid5 %></td><td><%= accnr5 %></td><td><%= insamlare5 %></td></tr></table></div>",
+			"__comment_EACH_value_one_row_popupTemplate": "<h2><%= kartid %></h2>Kartfilnamn urlencode: <%= filnamn %><br/>Kartid: <%= kartid %><br/>Sifferkartid: <%= sifferkart %><br/>Accession: <%= accessions %><br/>Insamlare: <%= insamlare %><br/>Antal sifferkartor: <%= antalfiler %><br/><a href=\"//filemaker.isof.se/Kartor-dokument/<%= kartlank_1 %>\" target=\"_blank\" rel=\"noopener noreferrer\" >Karta:</a><br/>Alla kartor:</br><%= kartlank1 %><%= kartlank2 %><%= kartlank3 %><%= kartlank4 %><%= kartlank5 %>",
+			"__comment_one_col_all_files_popupTemplate": "<h2><%= kartbladsi %></h2>Kartfilnamn urlencode: <%= kartlank %><br/>Kartid: <%= kartbladsi %><br/>Sifferkartid: <%= sifferkart %><br/>Accession: <%= accessions %><br/>Insamlare: <%= insamlare %><br/>Antal sifferkartor: <%= antalfiler %><br/><a href=\"//filemaker.isof.se/Kartor-dokument/<%= kartlank %>\" target=\"_blank\" rel=\"noopener noreferrer\" >Karta:</a><br/>Alla kartor:</a><%= kartlankar %></p>",
+			"labelField": "kartid"
 		},
 		{
 			"layerId": "Sifferkartor-Gn-kartan",
