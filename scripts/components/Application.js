@@ -136,8 +136,18 @@ export default class Application extends React.Component {
 								}
 								else {
 									function hasHit(searchTerm) { // Ändrad parameter från searchTerms till searchTerm
-										if (feature.properties[searchField]) {						
-											return feature.properties[searchField].toLowerCase().includes(searchTerm);
+										if (feature.properties[searchField]) {
+											// Ignore hits within html-tags if searchField contains html
+											let value = feature.properties[searchField];
+											if (/<[a-z][\s\S]*>/i.test(value)) {
+												// Remove <a> tags and their content
+												value = value.replace(/<a\b[^>]*>[\s\S]*?<\/a>/gi, '');
+												// Remove <th> tags and their content
+												value = value.replace(/<th\b[^>]*>[\s\S]*?<\/th>/gi, '');
+												// Remove other HTML tags
+												value = value.replace(/<[^>]*>/g, '');
+											}
+											return value.toLowerCase().includes(searchTerm);
 										}
 										return false;
 									}
