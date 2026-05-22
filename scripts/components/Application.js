@@ -268,6 +268,9 @@ export default class Application extends React.Component {
 			if (layerType == 'wms') {
 				this.addWMSLayer(layer);
 			}
+			if (layerType == 'tiles' || layerType == 'tile' || layerType == 'wmts') {
+				this.addTileLayer(layer);
+			}
 		}.bind(this));
 	}
 
@@ -545,6 +548,31 @@ export default class Application extends React.Component {
 			ISBASELAYER: layerConfig.ISBASELAYER,
 			TILESORIGIN: layerConfig.TILESORIGIN,
 		});
+
+		this.addLayer(layer, layerConfig);
+
+		this.leafletLayers[layerConfig.layerId] = layer;
+	}
+
+	addTileLayer(layerConfig) {
+		var options = _.extend({}, layerConfig.options || {});
+
+		_.each([
+			'attribution',
+			'crossOrigin',
+			'detectRetina',
+			'maxZoom',
+			'minZoom',
+			'opacity',
+			'tileSize',
+			'zIndex'
+		], function (optionName) {
+			if (layerConfig[optionName] !== undefined) {
+				options[optionName] = layerConfig[optionName];
+			}
+		});
+
+		var layer = L.tileLayer(layerConfig.url, options);
 
 		this.addLayer(layer, layerConfig);
 

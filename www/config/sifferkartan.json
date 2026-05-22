@@ -166,6 +166,17 @@
 			"labelField": "sockenstadnamn"
 		},
 		{
+			"layerId": "ekonomiska-tiff-test-wmts",
+			"hidden": false,
+			"type": "wmts",
+			"name": "Ekonomiska kartan raster",
+			"url": "https://oden.isof.se/geoserver/gwc/service/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&LAYER=Ekonomiska_raster_test:ekonomiska_tiff_test&STYLE=raster&TILEMATRIXSET=EPSG:900913&TILEMATRIX=EPSG:900913:{z}&TILEROW={y}&TILECOL={x}&FORMAT=image/png",
+			"options": {
+				"minZoom": 5,
+				"maxZoom": 17
+			}
+		},
+		{
 			"layerId": "socken",
 			"hidden": false,
 			"type": "wms",
