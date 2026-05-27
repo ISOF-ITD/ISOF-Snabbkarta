@@ -274,10 +274,186 @@ export default class Application extends React.Component {
 		}.bind(this));
 	}
 
+	isAntalThematicLayer(layerConfig) {
+		return layerConfig &&
+			layerConfig.thematic === true &&
+			layerConfig.layerId === 'Sifferkartor-ek-kartan-wfs';
+	}
+
+	getAntalValue(feature) {
+		var value = feature && feature.properties ? parseInt(feature.properties.antal, 10) : 1;
+
+		if (isNaN(value)) {
+			return 1;
+		}
+
+		return Math.max(1, Math.min(value, 5));
+	}
+
+	getAntalBorderColor(antal) {
+		/*var colors = {
+			1: '#deebf7',
+			2: '#9ecae1',
+			3: '#6baed6',
+			4: '#3182bd',
+			5: '#08519c'
+		};*/
+		var colors = {
+			1: '#08519c',
+			2: '#3182bd',
+			3: '#6baed6',
+			4: '#9ecae1',
+			5: '#deebf7'
+		};
+
+		return colors[antal] || colors[1];
+	}
+
+	interpolateLatLng(start, end, fraction) {
+		return L.latLng(
+			start.lat + ((end.lat - start.lat) * fraction),
+			start.lng + ((end.lng - start.lng) * fraction)
+		);
+	}
+
+	getThematicRectangleEdges(ring) {
+		var points = _.filter(ring, function (point, index) {
+			var firstPoint = ring[0];
+			var isClosingPoint = index === ring.length - 1 &&
+				point &&
+				firstPoint &&
+				point.lat === firstPoint.lat &&
+				point.lng === firstPoint.lng;
+
+			return point && !isClosingPoint;
+		});
+
+		if (points.length < 4) {
+			return null;
+		}
+
+		var pointsByLat = _.sortBy(points, function (point) {
+			return point.lat;
+		});
+		var bottom = _.sortBy(pointsByLat.slice(0, 2), function (point) {
+			return point.lng;
+		});
+		var top = _.sortBy(pointsByLat.slice(pointsByLat.length - 2), function (point) {
+			return point.lng;
+		});
+
+		return {
+			bottomLeft: bottom[0],
+			bottomRight: bottom[1],
+			topLeft: top[0],
+			topRight: top[1]
+		};
+	}
+
+	getThematicPolygonOuterRings(latlngs) {
+		if (!latlngs || !latlngs.length) {
+			return [];
+		}
+
+		if (latlngs[0] && latlngs[0].lat !== undefined) {
+			return [latlngs];
+		}
+
+		if (latlngs[0] && latlngs[0][0] && latlngs[0][0].lat !== undefined) {
+			return [latlngs[0]];
+		}
+
+		var rings = [];
+
+		_.each(latlngs, function (latlngGroup) {
+			rings = rings.concat(this.getThematicPolygonOuterRings(latlngGroup));
+		}.bind(this));
+
+		return rings;
+	}
+
+	getAntalStripeLines(featureLayer, stripeCount) {
+		var stripeLines = [];
+		var rings = this.getThematicPolygonOuterRings(featureLayer.getLatLngs());
+
+		_.each(rings, function (ring) {
+			var rectangleEdges = this.getThematicRectangleEdges(ring);
+
+			if (!rectangleEdges) {
+				return;
+			}
+
+			for (var i = 1; i <= stripeCount; i++) {
+				var fraction = i / (stripeCount + 1);
+				var bottom = this.interpolateLatLng(rectangleEdges.bottomLeft, rectangleEdges.bottomRight, fraction);
+				var top = this.interpolateLatLng(rectangleEdges.topLeft, rectangleEdges.topRight, fraction);
+
+				stripeLines.push([bottom, top]);
+			}
+		}.bind(this));
+
+		return stripeLines;
+	}
+
+	addAntalThematicStripes(layer) {
+		var stripeLayers = [];
+
+		layer.eachLayer(function (featureLayer) {
+			if (!featureLayer.feature || !featureLayer.getLatLngs) {
+				return;
+			}
+
+			var stripeCount = this.getAntalValue(featureLayer.feature) - 1;
+
+			if (stripeCount < 1) {
+				return;
+			}
+
+			_.each(this.getAntalStripeLines(featureLayer, stripeCount), function (stripeLine) {
+				stripeLayers.push(L.polyline(stripeLine, {
+					color: '#08519c',
+					weight: 2,
+					opacity: 1,
+					interactive: false
+				}));
+			});
+		}.bind(this));
+
+		_.each(stripeLayers, function (stripeLayer) {
+			layer.addLayer(stripeLayer);
+		});
+	}
+
+	applyAntalThematicStyle(layer, layerConfig) {
+		var thematicStyle = String(layerConfig.thematicStyle || 'bordercolor').toLowerCase();
+
+		if (layer.setStyle) {
+			layer.setStyle(function (feature) {
+				var antal = this.getAntalValue(feature);
+				var isBorderColorStyle = thematicStyle === 'bordercolor';
+
+				return {
+					color: isBorderColorStyle ? this.getAntalBorderColor(antal) : '#08519c',
+					weight: isBorderColorStyle ? 3 : 2,
+					opacity: 1,
+					fillOpacity: 0
+				};
+			}.bind(this));
+		}
+
+		if (thematicStyle === 'stripes' && layer.eachLayer) {
+			this.addAntalThematicStripes(layer);
+		}
+	}
+
 	addLayer(layer, layerConfig) {
 		// Lägger layer till kartan
 		layer.addTo(this.refs.map.map);
 		this.refs.map.layersControl.addOverlay(layer, layerConfig.name, true);
+
+		if (this.isAntalThematicLayer(layerConfig)) {
+			this.applyAntalThematicStyle(layer, layerConfig);
+		}
 
 		if ((layerConfig.markerStyle && layerConfig.markerStyle.fillColor) || layerConfig.menuColor) {
 			// Skapar css rule till customStyleSheet objectet, används för att visa färgsymbol i layers menyn

@@ -14,6 +14,8 @@
 			"layerId": "Sifferkartor-ek-kartan-wfs",
 			"hidden": false,
 			"type": "geojson",
+			"thematic": true,
+			"thematicStyle": "stripes",
 			"searchable": true,
 			"searchTextSelectExtended": true, 
 			"searchTextSelectDefault" : "endswith", 
