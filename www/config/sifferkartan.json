@@ -179,11 +179,22 @@
 			}
 		},
 		{
-			"layerId": "ekonomiska-tiff-test-wmts",
+			"layerId": "ekonomiska-tiff-wmts",
 			"hidden": false,
 			"type": "wmts",
 			"name": "Ekonomiska kartan raster",
 			"url": "https://oden.isof.se/geoserver/gwc/service/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&LAYER=Ekonomiska_kartan_mosaik:ekonomiska_kartan_mosaic&STYLE=raster&TILEMATRIXSET=EPSG:900913&TILEMATRIX=EPSG:900913:{z}&TILEROW={y}&TILECOL={x}&FORMAT=image/png",
+			"options": {
+				"minZoom": 5,
+				"maxZoom": 17
+			}
+		},
+		{
+			"layerId": "haradsekonomiska-tiff-wmts",
+			"hidden": false,
+			"type": "wmts",
+			"name": "Häradsekonomiska kartan raster",
+			"url": "https://oden.isof.se/geoserver/gwc/service/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&LAYER=haradsekonomiska_kartan_mosaic:haradsekonomiska_kartan_mosaic&STYLE=raster&TILEMATRIXSET=EPSG:900913&TILEMATRIX=EPSG:900913:{z}&TILEROW={y}&TILECOL={x}&FORMAT=image/png",
 			"options": {
 				"minZoom": 5,
 				"maxZoom": 17
