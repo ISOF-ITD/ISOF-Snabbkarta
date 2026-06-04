@@ -44,7 +44,7 @@
 				"sok"
 			],
 			"name": "Generalstabskartan Norra",
-			"__url": "https://garm.isof.se/static/js-apps/snabbkarta/data/sifferkartor_generalstabskartan_norra_geo.geojson",
+			"__url": "https://ull.isof.se/static/js-apps/snabbkarta/data/sifferkartor_generalstabskartan_norra_geo.geojson",
 			"__url": "https://sifferkartan.isof.se/data/sifferkartor_generalstabskartan_norra_geo.geojson",
 			"url": "data/sifferkartor_generalstabskartan_norra_geo.geojson",
 			"__url": "data/sifferkartan/sifferkartor_generalstabskartan_norra_geo.geojson",
@@ -121,7 +121,7 @@
 				"sok"
 				],
 			"name": "Sökbara socknar",
-			"__url": "https://garm-test.isof.se/static/js-apps/snabbkarta/data/sifferkartor_socken_punkt_geo.geojson",
+			"__url": "https://ull-test.isof.se/static/js-apps/snabbkarta/data/sifferkartor_socken_punkt_geo.geojson",
 			"__url": "https://sifferkartan.isof.se/data/sifferkartor_socken_punkt_geo.geojson",
 			"url": "data/sifferkartor_socken_punkt_geo.geojson",
 			"__url": "data/sifferkartan/sifferkartor_socken_punkt_geo.geojson",
@@ -150,7 +150,7 @@
 				"sok"
 				],
 			"name": "Sökbara nummerförteckningar på socken",
-			"__url": "https://garm-test.isof.se/static/js-apps/snabbkarta/data/sifferkartor_nummerforteckning_alla_filer_punkt_geo.geojson",
+			"__url": "https://ull-test.isof.se/static/js-apps/snabbkarta/data/sifferkartor_nummerforteckning_alla_filer_punkt_geo.geojson",
 			"__url": "https://sifferkartan.isof.se/data/sifferkartor_nummerforteckning_alla_filer_punkt_geo.geojson",
 			"url": "data/sifferkartor_nummerforteckning_alla_filer_punkt_geo.geojson",
 			"__url": "data/sifferkartan/sifferkartor_nummerforteckning_alla_filer_punkt_geo.geojson",
